@@ -27,9 +27,6 @@ export function PrimaryNav({ onNavigate }: PrimaryNavProps) {
       <AppNavLink to="/weekly-update" onClick={wrapClick}>
         Weekly update
       </AppNavLink>
-      <AppNavLink to="/settings" onClick={wrapClick}>
-        Settings
-      </AppNavLink>
     </>
   )
 }

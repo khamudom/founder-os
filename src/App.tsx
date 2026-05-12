@@ -7,7 +7,6 @@ import { DashboardPage } from '@/pages/DashboardPage'
 import { EventsPage } from '@/pages/EventsPage'
 import { FounderDutiesPage } from '@/pages/FounderDutiesPage'
 import { InvestorsPage } from '@/pages/InvestorsPage'
-import { SettingsPage } from '@/pages/SettingsPage'
 import { SignInPage } from '@/pages/SignInPage'
 import { WeeklyUpdatePage } from '@/pages/WeeklyUpdatePage'
 
@@ -59,7 +58,6 @@ export default function App() {
                 </RequireSession>
               }
             />
-            <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>

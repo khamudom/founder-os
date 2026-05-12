@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { EmailPasswordAuthForm } from '@/features/auth/EmailPasswordAuthForm'
 import { Card } from '@/components/ui/Card'
 import { SectionHeader } from '@/components/ui/SectionHeader'
@@ -95,9 +95,6 @@ export function SignInPage() {
             passwordFieldId="sign-in-password"
           />
         </Card>
-        <p className="fo-muted" style={{ margin: 0, fontSize: 'var(--fo-text-sm)' }}>
-          App preferences and account details: <Link to="/settings">Settings</Link>
-        </p>
       </div>
     </PageLayout>
   )

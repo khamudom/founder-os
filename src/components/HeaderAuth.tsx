@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { EmailPasswordAuthForm } from '@/features/auth/EmailPasswordAuthForm'
 import { Button } from '@/components/ui/Button'
 import { Modal } from '@/components/ui/Modal'
@@ -19,7 +19,6 @@ export type HeaderAuthProps = {
 }
 
 export function HeaderAuth({ drawer = false, onDrawerClose }: HeaderAuthProps) {
-  const navigate = useNavigate()
   const location = useLocation()
   const { flushPersist } = useAppState()
   const {
@@ -147,22 +146,9 @@ export function HeaderAuth({ drawer = false, onDrawerClose }: HeaderAuthProps) {
         onClose={handleClose}
         title="Sign in"
         footer={
-          <>
-            <Button type="button" variant="ghost" size="sm" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                handleClose()
-                navigate('/settings')
-              }}
-            >
-              Open settings
-            </Button>
-          </>
+          <Button type="button" variant="ghost" size="sm" onClick={handleClose}>
+            Cancel
+          </Button>
         }
       >
         <EmailPasswordAuthForm
