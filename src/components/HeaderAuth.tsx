@@ -11,7 +11,14 @@ function truncateEmail(email: string, max = 28): string {
   return `${email.slice(0, max - 1)}…`
 }
 
-export function HeaderAuth() {
+export type HeaderAuthProps = {
+  /** Stack account controls for the slide-out menu. */
+  drawer?: boolean
+  /** Called before opening the sign-in modal from the drawer (closes the drawer). */
+  onDrawerClose?: () => void
+}
+
+export function HeaderAuth({ drawer = false, onDrawerClose }: HeaderAuthProps) {
   const navigate = useNavigate()
   const location = useLocation()
   const { flushPersist } = useAppState()
@@ -83,7 +90,7 @@ export function HeaderAuth() {
   if (!configured) {
     return (
       <span
-        className="fo-header-auth fo-header-auth--muted"
+        className={`fo-header-auth fo-header-auth--muted${drawer ? ' fo-header-auth--drawer-muted' : ''}`}
         title="Add Supabase env vars and sign in to save data to the database"
       >
         Not persisted
@@ -94,11 +101,23 @@ export function HeaderAuth() {
   if (session) {
     const label = session.user.email ?? session.user.id
     return (
-      <div className="fo-header-auth fo-header-auth--signed-in">
-        <span className="fo-header-auth__email" title={label}>
-          {truncateEmail(label)}
+      <div
+        className={`fo-header-auth fo-header-auth--signed-in${drawer ? ' fo-header-auth--drawer' : ''}`}
+      >
+        <span
+          className={`fo-header-auth__email${drawer ? ' fo-header-auth__email--drawer' : ''}`}
+          title={label}
+        >
+          {drawer ? label : truncateEmail(label)}
         </span>
-        <Button type="button" variant="ghost" size="sm" disabled={busy} onClick={onSignOut}>
+        <Button
+          type="button"
+          variant={drawer ? 'secondary' : 'ghost'}
+          size="sm"
+          className={drawer ? 'fo-header-auth__btn-drawer' : undefined}
+          disabled={busy}
+          onClick={onSignOut}
+        >
           Sign out
         </Button>
       </div>
@@ -111,7 +130,16 @@ export function HeaderAuth() {
 
   return (
     <>
-      <Button type="button" variant="secondary" size="sm" onClick={() => setModalOpen(true)}>
+      <Button
+        type="button"
+        variant="secondary"
+        size="sm"
+        className={drawer ? 'fo-header-auth__btn-drawer' : undefined}
+        onClick={() => {
+          onDrawerClose?.()
+          setModalOpen(true)
+        }}
+      >
         Sign in
       </Button>
       <Modal

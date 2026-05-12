@@ -73,8 +73,8 @@
   --fo-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
   --fo-shadow-md: 0 8px 24px rgb(0 0 0 / 0.55);
 
-  --fo-color-btn-primary-text: #fff;
-  --fo-color-checkbox-mark: #fff;
+  --fo-color-btn-primary-text: var(--fo-color-bg);
+  --fo-color-checkbox-mark: var(--fo-color-bg);
 }
 
 [data-theme='light'] {

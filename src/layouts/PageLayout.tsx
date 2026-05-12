@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
-import { HeaderAuth } from '@/components/HeaderAuth'
-import { ThemeToggle } from '@/components/ThemeToggle'
-import { AppNavLink } from '@/components/ui/AppNavLink'
+import { HeaderMenuDrawer } from '@/components/HeaderMenuDrawer'
+import { PrimaryNav } from '@/components/PrimaryNav'
 import './PageLayout.css'
 
 export type PageLayoutProps = {
@@ -25,17 +24,11 @@ export function PageLayout({ title, children, authShell = false }: PageLayoutPro
           </div>
           <div className="fo-shell__header-actions">
             {authShell ? null : (
-              <nav className="fo-shell__nav" aria-label="Primary">
-                <AppNavLink to="/">Dashboard</AppNavLink>
-                <AppNavLink to="/duties">Duties</AppNavLink>
-                <AppNavLink to="/investors">Investors</AppNavLink>
-                <AppNavLink to="/events">Events</AppNavLink>
-                <AppNavLink to="/weekly-update">Weekly update</AppNavLink>
-                <AppNavLink to="/settings">Settings</AppNavLink>
+              <nav className="fo-shell__nav fo-shell__nav--desktop" aria-label="Primary">
+                <PrimaryNav />
               </nav>
             )}
-            <ThemeToggle />
-            {authShell ? null : <HeaderAuth />}
+            <HeaderMenuDrawer showPrimaryNav={!authShell} showAccount={!authShell} />
           </div>
         </div>
       </header>

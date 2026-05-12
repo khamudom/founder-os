@@ -111,22 +111,17 @@
 }
 
 @media (max-width: 900px) {
-  .fo-shell__header-inner {
-    flex-direction: column;
-    align-items: stretch;
+  .fo-shell__nav--desktop {
+    display: none;
   }
 
   .fo-shell__header-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--fo-space-2);
+    flex-wrap: nowrap;
   }
+}
 
-  .fo-shell__nav {
-    justify-content: flex-start;
-  }
-
-  .fo-header-auth--signed-in {
-    justify-content: space-between;
+@media (min-width: 901px) {
+  .fo-header-drawer__nav {
+    display: none !important;
   }
 }
