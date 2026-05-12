@@ -82,8 +82,11 @@ export function HeaderAuth() {
 
   if (!configured) {
     return (
-      <span className="fo-header-auth fo-header-auth--muted" title="Add Supabase env vars to enable cloud sync">
-        Local only
+      <span
+        className="fo-header-auth fo-header-auth--muted"
+        title="Add Supabase env vars and sign in to save data to the database"
+      >
+        Not persisted
       </span>
     )
   }

@@ -13,12 +13,27 @@ import {
   saveAppStateToSupabase,
 } from '@/lib/supabase/sync'
 import {
+  clearLegacyLocalAppState,
   createDebouncedPersist,
-  loadAppState,
-  saveAppState,
+  readLegacyLocalAppStateOnce,
   type DebouncedPersistHandle,
 } from '@/storage/loadSave'
+import { createDefaultState } from '@/storage/schema'
 import type { AppStateV1 } from '@/types'
+
+function logPersistError(context: string, e: unknown): void {
+  if (e && typeof e === 'object' && 'message' in e) {
+    const err = e as { message: string; code?: string; details?: string; hint?: string }
+    console.error(context, {
+      message: err.message,
+      code: err.code,
+      details: err.details,
+      hint: err.hint,
+    })
+    return
+  }
+  console.error(context, e)
+}
 
 export function AppStateProvider({ children }: { children: ReactNode }) {
   const { session, initialized } = useAuth()
@@ -33,9 +48,13 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const deb = createDebouncedPersist({
       persist: async (next) => {
-        saveAppState(next)
         const uid = latestUserIdRef.current
-        if (uid) await saveAppStateToSupabase(uid, next)
+        if (!uid) return
+        try {
+          await saveAppStateToSupabase(uid, next)
+        } catch (e) {
+          logPersistError('Failed to save app state to Supabase', e)
+        }
       },
     })
     debouncedRef.current = deb
@@ -53,22 +72,35 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     let cancelled = false
     void (async () => {
       const uid = session?.user?.id
-      if (uid) {
-        try {
-          const remote = await fetchAppStateFromSupabase(uid)
-          const local = loadAppState()
-          const chosen = remoteHasUserData(remote) ? remote : local
-          if (cancelled) return
-          setStateInternal(chosen)
-          if (!remoteHasUserData(remote)) {
-            await saveAppStateToSupabase(uid, chosen)
+      if (!uid) {
+        if (!cancelled) setStateInternal(createDefaultState())
+        return
+      }
+
+      try {
+        const remote = await fetchAppStateFromSupabase(uid)
+        let nextState = remote
+
+        if (!remoteHasUserData(remote)) {
+          const legacy = readLegacyLocalAppStateOnce()
+          if (legacy && remoteHasUserData(legacy)) {
+            try {
+              await saveAppStateToSupabase(uid, legacy)
+              nextState = legacy
+              clearLegacyLocalAppState()
+            } catch (e) {
+              logPersistError('Failed to migrate legacy browser data to Supabase', e)
+              nextState = legacy
+            }
           }
-        } catch (e) {
-          console.error(e)
-          if (!cancelled) setStateInternal(loadAppState())
+        } else {
+          clearLegacyLocalAppState()
         }
-      } else {
-        setStateInternal(loadAppState())
+
+        if (!cancelled) setStateInternal(nextState)
+      } catch (e) {
+        logPersistError('Failed to load app state from Supabase', e)
+        if (!cancelled) setStateInternal(createDefaultState())
       }
     })()
     return () => {
@@ -93,9 +125,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     debouncedRef.current?.cancel()
     const stamped: AppStateV1 = { ...next, updatedAt: new Date().toISOString() }
     setStateInternal(stamped)
-    saveAppState(stamped)
     const uid = latestUserIdRef.current
-    if (uid) void saveAppStateToSupabase(uid, stamped).catch(console.error)
+    if (uid) void saveAppStateToSupabase(uid, stamped).catch((e) => logPersistError('replaceState → Supabase save failed', e))
   }, [])
 
   const flushPersist = useCallback(async () => {

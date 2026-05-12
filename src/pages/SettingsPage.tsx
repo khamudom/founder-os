@@ -104,7 +104,7 @@ export function SettingsPage() {
         <Card padding="lg">
           <SectionHeader
             title="Account"
-            description="Sign in with Google or email to sync data to Supabase. Row-level security ties each row to your user id."
+            description="Sign in with Google or email. Your data is stored in Supabase; row-level security ties each row to your user id."
           />
           {!configured ? (
             <div className="fo-prose fo-muted">
@@ -144,8 +144,8 @@ export function SettingsPage() {
           <SectionHeader title="Data & privacy" />
           <div className="fo-prose fo-muted">
             <p>
-              Founder OS keeps a copy in <strong>this browser’s LocalStorage</strong>. When you are signed in,
-              changes also sync to your Supabase project for that account.
+              Founder OS loads and saves your workspace in <strong>Supabase</strong> when you are signed in. Sign in is
+              required for cloud-backed pages (dashboard, investors, etc.) when Supabase is configured.
             </p>
             <p>
               Deploying on Vercel? Consider enabling{' '}
@@ -161,7 +161,7 @@ export function SettingsPage() {
         <Card padding="lg">
           <SectionHeader
             title="Backup"
-            description="Plain JSON export/import. Import replaces your current local data after confirmation."
+            description="Plain JSON export/import. Import replaces your current workspace and writes to Supabase when you are signed in."
           />
           <div className="fo-cluster">
             <Button type="button" onClick={onExport}>
@@ -187,7 +187,7 @@ export function SettingsPage() {
           setImportOpen(false)
           setPendingJson(null)
         }}
-        title="Replace local data?"
+        title="Replace workspace data?"
         footer={
           <>
             <Button
@@ -207,8 +207,8 @@ export function SettingsPage() {
         }
       >
         <p style={{ marginTop: 0 }}>
-          This will overwrite everything stored in Founder OS on this browser profile. There is no undo beyond
-          exporting again first.
+          This will overwrite your current workspace in this session and, if you are signed in, in Supabase. Export a
+          backup first if you might need to undo.
         </p>
       </Modal>
 

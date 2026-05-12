@@ -1,29 +1,30 @@
 import { migrate } from '@/storage/migrate'
-import { STORAGE_KEY, createDefaultState } from '@/storage/schema'
+import { STORAGE_KEY } from '@/storage/schema'
 import type { AppStateV1 } from '@/types'
 
-export function loadAppState(): AppStateV1 {
+/** One-time read of pre–cloud-sync browser data (`founder-os.app.v1`). Does not remove the key. */
+export function readLegacyLocalAppStateOnce(): AppStateV1 | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return createDefaultState()
+    if (!raw) return null
     const parsed: unknown = JSON.parse(raw)
     return migrate(parsed)
   } catch {
-    return createDefaultState()
+    return null
   }
 }
 
-export function saveAppState(state: AppStateV1): void {
-  const next: AppStateV1 = {
-    ...state,
-    updatedAt: new Date().toISOString(),
+export function clearLegacyLocalAppState(): void {
+  try {
+    localStorage.removeItem(STORAGE_KEY)
+  } catch {
+    /* ignore quota / private mode */
   }
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
 }
 
 const DEBOUNCE_MS = 400
 
-/** Debounced persist hook used when cloud sync should run after local save. */
+/** Debounced persistence to Supabase (or other async backends). */
 export type DebouncedPersistHandle = {
   schedule: (state: AppStateV1) => void
   flush: () => Promise<void>

@@ -6,7 +6,8 @@ A small personal **founder accountability** web app: duties checklists, lightwei
 
 - Vite + React + TypeScript
 - Plain CSS design tokens (`src/styles/tokens.css`) + minimal primitives (`src/components/ui/`)
-- Local persistence via **`localStorage`** (key `founder-os.app.v1`) — **no backend**
+- **Supabase** (Postgres + Auth): signed-in users read/write app state in the database (Row Level Security per user). Theme preference still uses the browser (`founder-os.theme`).
+- If you previously used LocalStorage (`founder-os.app.v1`), the app attempts a **one-time upload** of that data after you sign in when your Supabase workspace is still empty, then removes that key.
 
 ## Run locally
 
@@ -30,9 +31,10 @@ This repo is a static SPA (`vite build` outputs `dist/`). Connect the repo to Ve
 
 ### Privacy notes
 
-- Data lives **only in the browser profile** that uses the app (per origin). Visitors to your deployment **do not see your CRM by default** — they get their own empty LocalStorage.
+- With Supabase configured, CRM and notes are tied to **your auth user** in your project. Other visitors do not see your rows (RLS).
+- Without Supabase env vars, main routes still render but **data is not persisted** (in-memory only until you add a project and sign in).
 - Optional: enable **[Deployment Protection](https://vercel.com/docs/security/deployment-protection)** on Vercel if you want a simple access gate (availability varies by plan).
-- Use **Settings → Export backup** regularly; clearing site data deletes LocalStorage unless you’ve exported JSON.
+- Use **Settings → Export backup** for a portable JSON copy of your workspace.
 
 ## Backup format
 
