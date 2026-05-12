@@ -1,0 +1,58 @@
+.fo-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fo-space-2);
+}
+
+.fo-field__label {
+  font-size: var(--fo-text-sm);
+  font-weight: var(--fo-weight-medium);
+  color: var(--fo-color-text);
+}
+
+.fo-field__control {
+  display: flex;
+  align-items: center;
+  gap: var(--fo-space-2);
+  border: 1px solid var(--fo-color-border-strong);
+  border-radius: var(--fo-radius-md);
+  background: var(--fo-color-surface);
+  padding-inline: var(--fo-space-3);
+  min-height: 42px;
+  box-shadow: inset 0 1px 2px color-mix(in oklab, var(--fo-color-text) 10%, var(--fo-color-surface));
+}
+
+.fo-field__control:focus-within {
+  border-color: color-mix(in oklab, var(--fo-color-accent) 55%, var(--fo-color-border-strong));
+  box-shadow:
+    inset 0 1px 2px color-mix(in oklab, var(--fo-color-text) 10%, var(--fo-color-surface)),
+    0 0 0 3px color-mix(in oklab, var(--fo-color-accent) 28%, var(--fo-color-bg));
+}
+
+.fo-field__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding-block: var(--fo-space-2);
+  outline: none;
+  font-size: var(--fo-text-md);
+}
+
+.fo-field__slot {
+  flex: 0 0 auto;
+  color: var(--fo-color-text-muted);
+  font-size: var(--fo-text-sm);
+}
+
+.fo-field__hint {
+  margin: 0;
+  font-size: var(--fo-text-sm);
+  color: var(--fo-color-text-muted);
+}
+
+.fo-field__error {
+  margin: 0;
+  font-size: var(--fo-text-sm);
+  color: var(--fo-color-danger);
+}

@@ -1,0 +1,116 @@
+:root {
+  /* Shared scale & typography (not theme-specific) */
+  --fo-font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu,
+    Cantarell, 'Noto Sans', sans-serif;
+  --fo-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  --fo-text-xs: 0.75rem;
+  --fo-text-sm: 0.875rem;
+  --fo-text-md: 1rem;
+  --fo-text-lg: 1.125rem;
+  --fo-text-xl: 1.375rem;
+  --fo-text-2xl: 1.75rem;
+  --fo-leading-tight: 1.25;
+  --fo-leading-normal: 1.55;
+  --fo-leading-relaxed: 1.65;
+  --fo-weight-regular: 400;
+  --fo-weight-medium: 500;
+  --fo-weight-semibold: 600;
+  --fo-space-1: 0.25rem;
+  --fo-space-2: 0.5rem;
+  --fo-space-3: 0.75rem;
+  --fo-space-4: 1rem;
+  --fo-space-5: 1.25rem;
+  --fo-space-6: 1.5rem;
+  --fo-space-8: 2rem;
+  --fo-space-10: 2.5rem;
+  --fo-space-12: 3rem;
+  --fo-radius-sm: 6px;
+  --fo-radius-md: 10px;
+  --fo-radius-lg: 14px;
+  --fo-radius-full: 999px;
+  --fo-duration-fast: 120ms;
+  --fo-duration-normal: 180ms;
+  --fo-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --fo-page-max: 1120px;
+  --fo-header-height: 56px;
+  --fo-z-modal: 50;
+  --fo-z-toast: 60;
+
+  /* Color tokens filled per theme via data-theme on <html> */
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --fo-color-bg: #141716;
+  --fo-color-surface: #1b201f;
+  --fo-color-surface-raised: #232928;
+  --fo-color-border: #303836;
+  --fo-color-border-strong: #3d4543;
+  --fo-color-text: #ecebe8;
+  --fo-color-text-muted: #9ca39f;
+  --fo-color-text-subtle: #6f7673;
+  --fo-color-accent: #6eb4b4;
+  --fo-color-accent-muted: #253332;
+  --fo-color-focus-ring: #8ecece;
+  --fo-color-danger: #f06760;
+  --fo-color-success-bg: #1a2e24;
+  --fo-color-success-text: #8fd4a8;
+  --fo-color-warning-bg: #2e2618;
+  --fo-color-warning-text: #e8c082;
+
+  --fo-color-header-bg: color-mix(in oklab, var(--fo-color-bg) 82%, black);
+  --fo-color-logo-highlight-inset: rgb(255 255 255 / 0.12);
+  --fo-fill-hover-subtle: rgb(255 255 255 / 0.06);
+  --fo-fill-hover-medium: rgb(255 255 255 / 0.1);
+  --fo-fill-nav-active: rgb(255 255 255 / 0.09);
+  --fo-fill-tabs-rail: rgb(0 0 0 / 0.35);
+  --fo-fill-tabs-hover: rgb(255 255 255 / 0.07);
+  --fo-checkbox-well-gloss: rgb(255 255 255 / 0.06);
+  --fo-modal-backdrop: rgb(0 0 0 / 0.72);
+  --fo-empty-fill: color-mix(in oklab, var(--fo-color-surface) 45%, var(--fo-color-bg));
+
+  --fo-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.45);
+  --fo-shadow-md: 0 8px 24px rgb(0 0 0 / 0.55);
+
+  --fo-color-btn-primary-text: #fff;
+  --fo-color-checkbox-mark: #fff;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --fo-color-bg: #f6f5f3;
+  --fo-color-surface: #ffffff;
+  --fo-color-surface-raised: #fdfcfa;
+  --fo-color-border: #e6e4df;
+  --fo-color-border-strong: #cfcac2;
+  --fo-color-text: #1c1b19;
+  --fo-color-text-muted: #5c5852;
+  --fo-color-text-subtle: #8a847a;
+  --fo-color-accent: #3d6b6b;
+  --fo-color-accent-muted: #e8f0f0;
+  --fo-color-focus-ring: #3d6b6b;
+  --fo-color-danger: #b42318;
+  --fo-color-success-bg: #e8f5ee;
+  --fo-color-success-text: #0f5132;
+  --fo-color-warning-bg: #fff4e5;
+  --fo-color-warning-text: #8a4b08;
+
+  --fo-color-header-bg: color-mix(in oklab, var(--fo-color-bg) 88%, white);
+  --fo-color-logo-highlight-inset: rgb(255 255 255 / 0.35);
+  --fo-fill-hover-subtle: rgb(28 27 25 / 0.05);
+  --fo-fill-hover-medium: rgb(28 27 25 / 0.08);
+  --fo-fill-nav-active: rgb(255 255 255 / 0.75);
+  --fo-fill-tabs-rail: rgb(28 27 25 / 0.04);
+  --fo-fill-tabs-hover: rgb(255 255 255 / 0.55);
+  --fo-checkbox-well-gloss: rgb(255 255 255 / 0.7);
+  --fo-modal-backdrop: rgb(17 16 15 / 0.45);
+  --fo-empty-fill: rgb(255 255 255 / 0.35);
+
+  --fo-shadow-sm: 0 1px 2px rgb(28 27 25 / 0.06);
+  --fo-shadow-md: 0 4px 14px rgb(28 27 25 / 0.08);
+
+  --fo-color-btn-primary-text: #fff;
+  --fo-color-checkbox-mark: #fff;
+}

@@ -1,0 +1,128 @@
+.fo-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.fo-shell__header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid var(--fo-color-border);
+  background: var(--fo-color-header-bg);
+  backdrop-filter: blur(10px);
+}
+
+.fo-shell__header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fo-space-4);
+  min-height: var(--fo-header-height);
+  padding-block: var(--fo-space-2);
+}
+
+.fo-shell__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--fo-space-3);
+  min-width: 0;
+}
+
+.fo-shell__logo {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--fo-color-accent) 72%, var(--fo-color-surface)),
+    var(--fo-color-accent)
+  );
+  box-shadow: 0 1px 0 var(--fo-color-logo-highlight-inset) inset;
+}
+
+.fo-shell__brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.fo-shell__name {
+  font-weight: var(--fo-weight-semibold);
+  letter-spacing: -0.02em;
+  font-size: var(--fo-text-md);
+  line-height: 1.2;
+}
+
+.fo-shell__tag {
+  font-size: var(--fo-text-xs);
+  color: var(--fo-color-text-muted);
+}
+
+.fo-shell__header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fo-space-2);
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.fo-shell__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fo-space-1);
+  justify-content: flex-end;
+}
+
+.fo-header-auth {
+  display: flex;
+  align-items: center;
+  gap: var(--fo-space-2);
+  flex-shrink: 0;
+}
+
+.fo-header-auth--muted {
+  font-size: var(--fo-text-xs);
+  color: var(--fo-color-text-muted);
+}
+
+.fo-header-auth__email {
+  font-size: var(--fo-text-xs);
+  color: var(--fo-color-text-muted);
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fo-shell__main {
+  flex: 1;
+  padding-block: var(--fo-space-8);
+}
+
+.fo-page-title h1 {
+  margin: 0 0 var(--fo-space-6);
+}
+
+@media (max-width: 900px) {
+  .fo-shell__header-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fo-shell__header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--fo-space-2);
+  }
+
+  .fo-shell__nav {
+    justify-content: flex-start;
+  }
+
+  .fo-header-auth--signed-in {
+    justify-content: space-between;
+  }
+}

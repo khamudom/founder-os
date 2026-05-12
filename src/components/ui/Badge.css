@@ -1,0 +1,35 @@
+.fo-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  padding: 2px var(--fo-space-2);
+  border-radius: var(--fo-radius-full);
+  font-size: var(--fo-text-xs);
+  font-weight: var(--fo-weight-medium);
+  line-height: var(--fo-leading-tight);
+  border: 1px solid transparent;
+}
+
+.fo-badge--neutral {
+  background: color-mix(in oklab, var(--fo-color-text) 6%, var(--fo-color-bg));
+  color: var(--fo-color-text-muted);
+  border-color: color-mix(in oklab, var(--fo-color-text) 10%, var(--fo-color-bg));
+}
+
+.fo-badge--info {
+  background: var(--fo-color-accent-muted);
+  color: var(--fo-color-accent);
+  border-color: color-mix(in oklab, var(--fo-color-accent) 28%, var(--fo-color-bg));
+}
+
+.fo-badge--success {
+  background: var(--fo-color-success-bg);
+  color: var(--fo-color-success-text);
+  border-color: color-mix(in oklab, var(--fo-color-success-text) 22%, var(--fo-color-bg));
+}
+
+.fo-badge--warning {
+  background: var(--fo-color-warning-bg);
+  color: var(--fo-color-warning-text);
+  border-color: color-mix(in oklab, var(--fo-color-warning-text) 22%, var(--fo-color-bg));
+}

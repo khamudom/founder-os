@@ -1,0 +1,13 @@
+.fo-toast {
+  position: fixed;
+  right: var(--fo-space-4);
+  bottom: var(--fo-space-4);
+  z-index: var(--fo-z-toast);
+  padding: var(--fo-space-3) var(--fo-space-4);
+  border-radius: var(--fo-radius-md);
+  border: 1px solid var(--fo-color-border);
+  background: var(--fo-color-surface);
+  box-shadow: var(--fo-shadow-md);
+  font-size: var(--fo-text-sm);
+  color: var(--fo-color-text);
+}

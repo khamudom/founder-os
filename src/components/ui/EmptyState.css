@@ -1,0 +1,26 @@
+.fo-empty {
+  padding: var(--fo-space-8) var(--fo-space-4);
+  text-align: center;
+  border: 1px dashed var(--fo-color-border);
+  border-radius: var(--fo-radius-lg);
+  background: var(--fo-empty-fill);
+}
+
+.fo-empty__title {
+  margin: 0 0 var(--fo-space-2);
+  font-weight: var(--fo-weight-semibold);
+  color: var(--fo-color-text);
+}
+
+.fo-empty__desc {
+  margin: 0 auto;
+  max-width: 52ch;
+  color: var(--fo-color-text-muted);
+  font-size: var(--fo-text-sm);
+}
+
+.fo-empty__action {
+  margin-top: var(--fo-space-4);
+  display: flex;
+  justify-content: center;
+}

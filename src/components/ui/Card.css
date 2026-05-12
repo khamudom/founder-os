@@ -1,0 +1,33 @@
+.fo-card {
+  background: var(--fo-color-surface);
+  border: 1px solid var(--fo-color-border);
+  border-radius: var(--fo-radius-lg);
+  box-shadow: var(--fo-shadow-sm);
+}
+
+.fo-card--p-none {
+  padding: 0;
+}
+
+.fo-card--p-sm {
+  padding: var(--fo-space-3);
+}
+
+.fo-card--p-md {
+  padding: var(--fo-space-4);
+}
+
+.fo-card--p-lg {
+  padding: var(--fo-space-6);
+}
+
+.fo-card--interactive {
+  transition:
+    border-color var(--fo-duration-fast) var(--fo-ease-standard),
+    box-shadow var(--fo-duration-fast) var(--fo-ease-standard);
+}
+
+.fo-card--interactive:hover {
+  border-color: color-mix(in oklab, var(--fo-color-border-strong) 70%, var(--fo-color-accent));
+  box-shadow: var(--fo-shadow-md);
+}

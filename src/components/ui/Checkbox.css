@@ -1,0 +1,73 @@
+.fo-checkbox {
+  display: flex;
+}
+
+.fo-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.fo-checkbox__label {
+  display: flex;
+  gap: var(--fo-space-3);
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fo-checkbox__input:disabled + .fo-checkbox__label {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.fo-checkbox__box {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: var(--fo-radius-sm);
+  border: 1px solid var(--fo-color-border-strong);
+  background: var(--fo-color-surface);
+  box-shadow: inset 0 1px 0 var(--fo-checkbox-well-gloss);
+}
+
+.fo-checkbox__input:focus-visible + .fo-checkbox__label .fo-checkbox__box {
+  outline: 2px solid var(--fo-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fo-checkbox__input:checked + .fo-checkbox__label .fo-checkbox__box {
+  background: var(--fo-color-accent);
+  border-color: color-mix(in oklab, var(--fo-color-accent) 85%, black);
+  box-shadow: none;
+}
+
+.fo-checkbox__input:checked + .fo-checkbox__label .fo-checkbox__box::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 10px;
+  margin: 1px auto 0;
+  border: 2px solid var(--fo-color-checkbox-mark);
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(45deg);
+}
+
+.fo-checkbox__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fo-space-1);
+  font-size: var(--fo-text-md);
+  line-height: var(--fo-leading-normal);
+  color: var(--fo-color-text);
+}
+
+.fo-checkbox__hint {
+  font-size: var(--fo-text-sm);
+  color: var(--fo-color-text-muted);
+}

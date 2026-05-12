@@ -1,0 +1,21 @@
+.fo-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--fo-space-2) var(--fo-space-3);
+  border-radius: var(--fo-radius-md);
+  color: var(--fo-color-text-muted);
+  text-decoration: none;
+  font-size: var(--fo-text-sm);
+  font-weight: var(--fo-weight-medium);
+}
+
+.fo-nav-link:hover {
+  color: var(--fo-color-text);
+  background: var(--fo-fill-hover-subtle);
+}
+
+.fo-nav-link--active {
+  color: var(--fo-color-text);
+  background: var(--fo-fill-nav-active);
+  border: 1px solid var(--fo-color-border);
+}

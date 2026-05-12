@@ -1,0 +1,76 @@
+.fo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fo-space-2);
+  border-radius: var(--fo-radius-md);
+  border: 1px solid transparent;
+  font-weight: var(--fo-weight-medium);
+  cursor: pointer;
+  transition:
+    background-color var(--fo-duration-fast) var(--fo-ease-standard),
+    border-color var(--fo-duration-fast) var(--fo-ease-standard),
+    color var(--fo-duration-fast) var(--fo-ease-standard),
+    box-shadow var(--fo-duration-fast) var(--fo-ease-standard);
+}
+
+.fo-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.fo-btn--sm {
+  min-height: 36px;
+  padding: 0 var(--fo-space-3);
+  font-size: var(--fo-text-sm);
+}
+
+.fo-btn--md {
+  min-height: 42px;
+  padding: 0 var(--fo-space-4);
+  font-size: var(--fo-text-md);
+}
+
+.fo-btn--block {
+  width: 100%;
+}
+
+.fo-btn--primary {
+  background: var(--fo-color-accent);
+  color: var(--fo-color-btn-primary-text);
+  border-color: color-mix(in oklab, var(--fo-color-accent) 85%, black);
+}
+
+.fo-btn--primary:hover:not(:disabled) {
+  filter: brightness(1.03);
+}
+
+.fo-btn--secondary {
+  background: var(--fo-color-surface);
+  color: var(--fo-color-text);
+  border-color: var(--fo-color-border-strong);
+  box-shadow: var(--fo-shadow-sm);
+}
+
+.fo-btn--secondary:hover:not(:disabled) {
+  background: var(--fo-color-surface-raised);
+}
+
+.fo-btn--ghost {
+  background: transparent;
+  color: var(--fo-color-text);
+  border-color: transparent;
+}
+
+.fo-btn--ghost:hover:not(:disabled) {
+  background: var(--fo-fill-hover-subtle);
+}
+
+.fo-btn--danger {
+  background: var(--fo-color-danger);
+  color: var(--fo-color-btn-primary-text);
+}
+
+.fo-btn--danger:hover:not(:disabled) {
+  filter: brightness(1.03);
+}
