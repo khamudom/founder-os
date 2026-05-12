@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { EmailPasswordAuthForm } from '@/features/auth/EmailPasswordAuthForm'
 import { Button } from '@/components/ui/Button'
 import { Modal } from '@/components/ui/Modal'
@@ -13,6 +13,7 @@ function truncateEmail(email: string, max = 28): string {
 
 export function HeaderAuth() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { flushPersist } = useAppState()
   const {
     session,
@@ -99,6 +100,10 @@ export function HeaderAuth() {
         </Button>
       </div>
     )
+  }
+
+  if (location.pathname === '/sign-in') {
+    return null
   }
 
   return (

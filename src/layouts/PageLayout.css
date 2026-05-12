@@ -13,6 +13,10 @@
   backdrop-filter: blur(10px);
 }
 
+.fo-shell__header--auth .fo-shell__header-actions {
+  flex-wrap: nowrap;
+}
+
 .fo-shell__header-inner {
   display: flex;
   align-items: center;

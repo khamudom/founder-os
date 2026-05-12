@@ -7,12 +7,14 @@ import './PageLayout.css'
 export type PageLayoutProps = {
   title?: string
   children: ReactNode
+  /** Omits app navigation and account controls (sign-in–only shell). */
+  authShell?: boolean
 }
 
-export function PageLayout({ title, children }: PageLayoutProps) {
+export function PageLayout({ title, children, authShell = false }: PageLayoutProps) {
   return (
     <div className="fo-shell">
-      <header className="fo-shell__header">
+      <header className={`fo-shell__header${authShell ? ' fo-shell__header--auth' : ''}`}>
         <div className="fo-container fo-shell__header-inner">
           <div className="fo-shell__brand">
             <span className="fo-shell__logo" aria-hidden="true" />
@@ -22,16 +24,18 @@ export function PageLayout({ title, children }: PageLayoutProps) {
             </div>
           </div>
           <div className="fo-shell__header-actions">
-            <nav className="fo-shell__nav" aria-label="Primary">
-              <AppNavLink to="/">Dashboard</AppNavLink>
-              <AppNavLink to="/duties">Duties</AppNavLink>
-              <AppNavLink to="/investors">Investors</AppNavLink>
-              <AppNavLink to="/events">Events</AppNavLink>
-              <AppNavLink to="/weekly-update">Weekly update</AppNavLink>
-              <AppNavLink to="/settings">Settings</AppNavLink>
-            </nav>
+            {authShell ? null : (
+              <nav className="fo-shell__nav" aria-label="Primary">
+                <AppNavLink to="/">Dashboard</AppNavLink>
+                <AppNavLink to="/duties">Duties</AppNavLink>
+                <AppNavLink to="/investors">Investors</AppNavLink>
+                <AppNavLink to="/events">Events</AppNavLink>
+                <AppNavLink to="/weekly-update">Weekly update</AppNavLink>
+                <AppNavLink to="/settings">Settings</AppNavLink>
+              </nav>
+            )}
             <ThemeToggle />
-            <HeaderAuth />
+            {authShell ? null : <HeaderAuth />}
           </div>
         </div>
       </header>

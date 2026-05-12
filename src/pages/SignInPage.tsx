@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { EmailPasswordAuthForm } from '@/features/auth/EmailPasswordAuthForm'
 import { Card } from '@/components/ui/Card'
 import { SectionHeader } from '@/components/ui/SectionHeader'
@@ -31,12 +31,6 @@ export function SignInPage() {
       navigate('/', { replace: true })
     }
   }, [configured, navigate])
-
-  useEffect(() => {
-    if (configured && session) {
-      navigate(from, { replace: true })
-    }
-  }, [configured, session, from, navigate])
 
   const clearForm = useCallback(() => {
     setPassword('')
@@ -75,8 +69,12 @@ export function SignInPage() {
     return null
   }
 
+  if (session) {
+    return <Navigate to={from} replace />
+  }
+
   return (
-    <PageLayout title="Sign in">
+    <PageLayout title="Sign in" authShell>
       <div className="fo-stack">
         <Card padding="lg">
           <SectionHeader
