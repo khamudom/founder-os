@@ -9,6 +9,7 @@ import { Select } from '@/components/ui/Select'
 import { TextArea } from '@/components/ui/TextArea'
 import { TextField } from '@/components/ui/TextField'
 import type { Investor, InvestorStage } from '@/types'
+import { normalizeOptionalDateInput } from '@/utils/date'
 import { filterInvestors, investorStageLabel, type InvestorFilter } from '@/features/investors/selectors'
 import { useAppState } from '@/hooks/useAppState'
 import { PageLayout } from '@/layouts/PageLayout'
@@ -30,8 +31,6 @@ function emptyInvestor(): Investor {
     roleTitle: '',
     stage: 'need_contact',
     warmIntroSource: '',
-    lastContactDate: '',
-    nextFollowUpDate: '',
     notes: '',
     links: [],
     createdAt: now,
@@ -80,6 +79,8 @@ export function InvestorsPage() {
       ...draft,
       name,
       links: parseLinks(linksText),
+      lastContactDate: normalizeOptionalDateInput(draft.lastContactDate),
+      nextFollowUpDate: normalizeOptionalDateInput(draft.nextFollowUpDate),
       updatedAt: now,
     }
 

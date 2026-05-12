@@ -60,3 +60,22 @@ export function parseDateOnly(s: string): Date | null {
   if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return null
   return dt
 }
+
+/**
+ * Optional calendar dates from the UI (`<input type="date">` uses '' when cleared).
+ * Absent/blank → undefined so domain types match optional fields.
+ */
+export function normalizeOptionalDateInput(value: string | undefined): string | undefined {
+  const t = value?.trim()
+  if (!t) return undefined
+  return parseDateOnly(t) ? t : undefined
+}
+
+/**
+ * Same normalization as {@link normalizeOptionalDateInput}, expressed as SQL NULL for PostgREST.
+ * PostgreSQL DATE columns reject ''; nullable DATE maps empty input to NULL.
+ */
+export function toSqlDateNull(value: string | undefined | null): string | null {
+  const normalized = normalizeOptionalDateInput(value ?? undefined)
+  return normalized ?? null
+}

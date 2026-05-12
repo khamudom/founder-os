@@ -1,7 +1,7 @@
 import { getSupabase } from '@/lib/supabase/client'
 import { normalizeWeeklyDraft } from '@/storage/migrate'
 import { createDefaultState } from '@/storage/schema'
-import { getWeeklyPeriodKey } from '@/utils/date'
+import { getWeeklyPeriodKey, toSqlDateNull } from '@/utils/date'
 import type {
   AppStateV1,
   DailyNote,
@@ -199,8 +199,8 @@ export async function saveAppStateToSupabase(userId: string, state: AppStateV1):
     role_title: i.roleTitle ?? null,
     stage: i.stage,
     warm_intro_source: i.warmIntroSource ?? null,
-    last_contact_date: i.lastContactDate ?? null,
-    next_follow_up_date: i.nextFollowUpDate ?? null,
+    last_contact_date: toSqlDateNull(i.lastContactDate),
+    next_follow_up_date: toSqlDateNull(i.nextFollowUpDate),
     fit_score: i.fitScore ?? null,
     notes: i.notes ?? null,
     links: i.links,
@@ -208,20 +208,26 @@ export async function saveAppStateToSupabase(userId: string, state: AppStateV1):
     updated_at: i.updatedAt,
   }))
 
-  const eventRows: Record<string, unknown>[] = stamped.events.map((e) => ({
-    id: e.id,
-    user_id: userId,
-    name: e.name,
-    location: e.location ?? null,
-    type: e.type,
-    date: e.date,
-    link: e.link ?? null,
-    status: e.status,
-    notes: e.notes ?? null,
-    contacts_made: e.contactsMade ?? null,
-    created_at: e.createdAt,
-    updated_at: e.updatedAt,
-  }))
+  const eventRows: Record<string, unknown>[] = stamped.events.flatMap((e) => {
+    const date = toSqlDateNull(e.date)
+    if (!date) return []
+    return [
+      {
+        id: e.id,
+        user_id: userId,
+        name: e.name,
+        location: e.location ?? null,
+        type: e.type,
+        date,
+        link: e.link ?? null,
+        status: e.status,
+        notes: e.notes ?? null,
+        contacts_made: e.contactsMade ?? null,
+        created_at: e.createdAt,
+        updated_at: e.updatedAt,
+      },
+    ]
+  })
 
   const dutyRows: Record<string, unknown>[] = stamped.dutyCompletions.map((d) => ({
     user_id: userId,
@@ -230,11 +236,11 @@ export async function saveAppStateToSupabase(userId: string, state: AppStateV1):
     completed_at: d.completedAt,
   }))
 
-  const noteRows: Record<string, unknown>[] = stamped.dailyNotes.map((n) => ({
-    user_id: userId,
-    note_date: n.date,
-    body: n.text,
-  }))
+  const noteRows: Record<string, unknown>[] = stamped.dailyNotes.flatMap((n) => {
+    const noteDate = toSqlDateNull(n.date)
+    if (!noteDate) return []
+    return [{ user_id: userId, note_date: noteDate, body: n.text }]
+  })
 
   await Promise.all([
     insertInChunks('investors', investorRows),
