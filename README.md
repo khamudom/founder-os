@@ -34,8 +34,3 @@ This repo is a static SPA (`vite build` outputs `dist/`). Connect the repo to Ve
 - With Supabase configured, CRM and notes are tied to **your auth user** in your project. Other visitors do not see your rows (RLS).
 - Without Supabase env vars, main routes still render but **data is not persisted** (in-memory only until you add a project and sign in).
 - Optional: enable **[Deployment Protection](https://vercel.com/docs/security/deployment-protection)** on Vercel if you want a simple access gate (availability varies by plan).
-- Use **Settings → Export backup** for a portable JSON copy of your workspace.
-
-## Backup format
-
-Exports are plaintext JSON (`AppState` v1). Treat backup files as confidential.

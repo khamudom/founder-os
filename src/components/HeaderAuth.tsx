@@ -160,7 +160,7 @@ export function HeaderAuth({ drawer = false, onDrawerClose }: HeaderAuthProps) {
                 navigate('/settings')
               }}
             >
-              Account & backup
+              Open settings
             </Button>
           </>
         }

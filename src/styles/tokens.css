@@ -60,7 +60,6 @@
   --fo-color-warning-text: #e8c082;
 
   --fo-color-header-bg: color-mix(in oklab, var(--fo-color-bg) 82%, black);
-  --fo-color-logo-highlight-inset: rgb(255 255 255 / 0.12);
   --fo-fill-hover-subtle: rgb(255 255 255 / 0.06);
   --fo-fill-hover-medium: rgb(255 255 255 / 0.1);
   --fo-fill-nav-active: rgb(255 255 255 / 0.09);
@@ -98,7 +97,6 @@
   --fo-color-warning-text: #8a4b08;
 
   --fo-color-header-bg: color-mix(in oklab, var(--fo-color-bg) 88%, white);
-  --fo-color-logo-highlight-inset: rgb(255 255 255 / 0.35);
   --fo-fill-hover-subtle: rgb(28 27 25 / 0.05);
   --fo-fill-hover-medium: rgb(28 27 25 / 0.08);
   --fo-fill-nav-active: rgb(255 255 255 / 0.75);

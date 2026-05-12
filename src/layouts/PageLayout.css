@@ -33,35 +33,12 @@
   min-width: 0;
 }
 
-.fo-shell__logo {
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-  background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--fo-color-accent) 72%, var(--fo-color-surface)),
-    var(--fo-color-accent)
-  );
-  box-shadow: 0 1px 0 var(--fo-color-logo-highlight-inset) inset;
-}
-
-.fo-shell__brand-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
 .fo-shell__name {
   font-weight: var(--fo-weight-semibold);
   letter-spacing: -0.02em;
   font-size: var(--fo-text-md);
   line-height: 1.2;
-}
-
-.fo-shell__tag {
-  font-size: var(--fo-text-xs);
-  color: var(--fo-color-text-muted);
+  min-width: 0;
 }
 
 .fo-shell__header-actions {

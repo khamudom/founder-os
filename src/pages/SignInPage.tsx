@@ -96,7 +96,7 @@ export function SignInPage() {
           />
         </Card>
         <p className="fo-muted" style={{ margin: 0, fontSize: 'var(--fo-text-sm)' }}>
-          Need a JSON backup or local import? <Link to="/settings">Settings</Link>
+          App preferences and account details: <Link to="/settings">Settings</Link>
         </p>
       </div>
     </PageLayout>

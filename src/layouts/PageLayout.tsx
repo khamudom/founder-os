@@ -16,11 +16,7 @@ export function PageLayout({ title, children, authShell = false }: PageLayoutPro
       <header className={`fo-shell__header${authShell ? ' fo-shell__header--auth' : ''}`}>
         <div className="fo-container fo-shell__header-inner">
           <div className="fo-shell__brand">
-            <span className="fo-shell__logo" aria-hidden="true" />
-            <div className="fo-shell__brand-text">
-              <span className="fo-shell__name">Founder OS</span>
-              <span className="fo-shell__tag">Personal accountability</span>
-            </div>
+            <span className="fo-shell__name">Founder OS</span>
           </div>
           <div className="fo-shell__header-actions">
             {authShell ? null : (
